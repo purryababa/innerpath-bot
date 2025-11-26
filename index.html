@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InnerPath 2026 — Raw Path Home</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Obviously:wght@900&family=Space+Mono&display=swap');
+        
+        body { 
+            background: #0B0B0B; 
+            color: #fff; 
+            font-family: 'Space Mono', monospace;
+            margin: 0; padding: 0; overflow-x: hidden;
+            text-align: center;
+        }
+        h1, h2 { font-family: 'Obviously', sans-serif; letter-spacing: -2px; }
+        .glitch { 
+            animation: glitch 3s infinite; 
+            font-size: 4rem; 
+            color: #FF1E56; 
+            text-shadow: 0 0 10px #FF1E56;
+        }
+        @keyframes glitch {
+            0% { text-shadow: 0.05em 0 0 #FF1E56, -0.05em -0.05em 0 #8B00FF; }
+            15% { text-shadow: 0.05em 0 0 #FF1E56, -0.05em -0.05em 0 #8B00FF; }
+            16% { text-shadow: -0.05em -0.05em 0 #FF1E56, 0.05em 0.05em 0 #8B00FF; }
+            100% { text-shadow: -0.05em -0.05em 0 #FF1E56, 0.05em 0.05em 0 #8B00FF; }
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+        .progress-map { 
+            background: #1a1a1a; 
+            border: 2px solid #FF1E56; 
+            border-radius: 20px; 
+            padding: 2rem; 
+            margin: 3rem 0;
+            position: relative;
+            background-image: linear-gradient(45deg, #1a1a1a 25%, transparent 25%), linear-gradient(-45deg, #1a1a1a 25%, transparent 25%);
+            background-size: 20px 20px;
+        }
+        .cta { 
+            background: #FF1E56; 
+            color: #0B0B0B; 
+            padding: 1.5rem 3rem; 
+            font-size: 1.5rem; 
+            border: none; 
+            cursor: pointer; 
+            margin: 3rem;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+        .archetype-reveal { display: none; font-size: 2rem; margin: 3rem; color: #8B00FF; }
+        .quiz button { background: #333; margin: 0.5rem; padding: 1rem; width: 80%; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="glitch">InnerPath 2026</h1>
+        <p>اینجا جای “قوی بودن” نیست.<br>اینجا خودِ خامت، نسخهٔ قشنگشه.</p>
+        
+        <h2>تو الان دقیقاً کجایی؟</h2>
+        <div class="quiz" id="quiz">
+            <p>۱. این روزا بیشتر شبیه کدومشونی؟</p>
+            <button onclick="answer(1,'tension')">⚡ پر از تنش</button>
+            <button onclick="answer(1,'numb')">🌑 بی‌حس</button>
+            <button onclick="answer(1,'overthinking')">🌪 خسته از فکر زیاد</button>
+        </div>
+
+        <div id="archetype-reveal" class="archetype-reveal"></div>
+
+        <div class="progress-map">
+            <h2>Progress Map — مسیر خام تو</h2>
+            <p>Day 0 → RAW<br>
+               ↓<br>
+               Day 7 → SHIFT<br>
+               ↓<br>
+               Day 14 → REBIRTH<br>
+               ↓<br>
+               2026 → Co-Creator</p>
+            <p style="color:#FF1E56; animation: pulse 2s infinite;">تو الان Day 0 هستی. آماده‌ای بری جلو؟</p>
+        </div>
+
+        <button class="cta" onclick="window.location.href='https://t.me/InnerPath_inyou_bot'">
+            شروع کن — با in.you حرف بزن
+        </button>
+
+        <p style="font-size:0.8rem; color:#666;">
+            InnerPath — Emotional Intelligence × Dark Game Design<br>
+            Reverse Funding | IRL Quests | Fandom Identity | 2026
+        </p>
+    </div>
+
+    <script>
+        let answers = [];
+        function answer(q, ans) {
+            answers.push(ans);
+            if (answers.length === 1) {
+                document.querySelector('.quiz').innerHTML = `
+                    <p>۲. آخرین بار کی احساس کردی داری از خودت جدا می‌شی؟</p>
+                    <button onclick="answer(2,'recent')">چند ساعت پیش</button>
+                    <button onclick="answer(2,'days')">چند روز پیش</button>
+                    <button onclick="answer(2,'weeks')">چند هفته پیش</button>
+                `;
+            } else if (answers.length === 2) {
+                document.querySelector('.quiz').innerHTML = `<p>۳. فقط یه چیز الان تغییر کنه، چی باشه؟ (بنویس)</p><input id="textans"><button onclick="final()">بفرست</button>`;
+            }
+        }
+        function final() {
+            let tension = answers.filter(a => a === 'tension' || a === 'overthinking' || a === 'recent').length;
+            let archetype = tension >= 1 ? "Anxiety Seeker" : answers.includes('numb') ? "Creative Loner" : "Anger/Shame Kid";
+            document.getElementById('archetype-reveal').style.display = 'block';
+            document.getElementById('archetype-reveal').innerHTML = `
+                <h2>Archetype تو: ${archetype}</h2>
+                <p>Path ID: ${Math.floor(1000 + Math.random() * 9000)}</p>
+                <p style="color:#FF1E56;">in.you منتظرته.</p>
+            `;
+            document.querySelector('.quiz').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
