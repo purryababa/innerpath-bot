@@ -10,7 +10,7 @@ from datetime import date
 # ============= امن‌ترین راه اتصال به Railway Postgres =============
 DATABASE_URL = os.getenv("DATABASE_URL")
 if not DATABASE_URL:
-    raise ValueError("DATABASE_URL not set! Set it in Railway Variables or .env")
+    raise ValueError(${{ Postgres.DATABASE_URL }})
 
 db = urlparse(DATABASE_URL)
 conn = psycopg2.connect(
